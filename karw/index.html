@@ -1,0 +1,39 @@
+select.php
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>SELECT TEST</title>
+</head>
+
+<body>
+    <?php
+    $servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "iot";
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+} 
+
+$sql = "SELECT name, PhoneNumber FROM notephone"; //เลือกจาก database
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    // output data of each row
+    while($row = $result->fetch_assoc()) {
+        echo "ชื่อ: " . $row["name"]. "เบอร์โทร: " . $row["PhoneNumber"]."<br>";
+    } //เลือกจาก database name,phonenumber=คอลัมน์
+} else {
+    echo "0 results";
+}
+$conn->close();
+    ?>
+
+</body>
+
+</html>
